@@ -1,0 +1,42 @@
+group 'me.alvivi.fabstest'
+version '0.0.1'
+
+buildscript {
+    ext.appEngine = '1.9.38'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.38'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'appengine'
+
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
+
+dependencies {
+    appengineSdk "com.google.appengine:appengine-java-sdk:$appEngine"
+    compile "com.google.appengine:appengine-api-1.0-sdk:$appEngine"
+    compile 'com.firebase:firebase-client-jvm:2.5.2'
+    compile 'javax.servlet:servlet-api:2.5'
+}
+
+appengine {
+    httpPort = 8888
+    downloadSdk = true
+
+    appcfg {
+        noCookies = true
+        oauth2 = true
+    }
+}
