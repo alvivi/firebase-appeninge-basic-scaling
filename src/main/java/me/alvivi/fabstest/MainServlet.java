@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Logger;
 
-@SuppressWarnings("serial")
 public class MainServlet extends HttpServlet {
     private static final Logger log = Logger.getLogger(MainServlet.class.getName());
 
@@ -18,7 +17,7 @@ public class MainServlet extends HttpServlet {
         final Object lock = new Object();
         final PrintWriter out = resp.getWriter();
         final Firebase rootRef = new Firebase("https://alvivi-test.firebaseio.com");
-        rootRef.goOnline();
+        Firebase.goOnline();
         log.info("Firebase is ONLINE");
         rootRef.child("message").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -34,7 +33,7 @@ public class MainServlet extends HttpServlet {
             @Override
             public void onCancelled(FirebaseError firebaseError) {
                 out.printf("Cancelled: %s\n", firebaseError.getMessage());
-                rootRef.goOffline();
+                Firebase.goOffline();
                 log.info("Firebase is OFFLINE");
                 synchronized (lock) {
                     lock.notify();
