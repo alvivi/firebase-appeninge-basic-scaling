@@ -5,5 +5,5 @@ This repository contains a simple example of an appengine module using firebase.
 These are the steps to configure, upload and test the issue:
 
 * Edit application ID in `src/main/webapp/WEB-INF/appengine-web.xml`
-* Upload the module using `gradlew appengineRun`
+* Upload the module using `gradlew appengineUpdate`
 * Do an HTTP GET request to the module.
