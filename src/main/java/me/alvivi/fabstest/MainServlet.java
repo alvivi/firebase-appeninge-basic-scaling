@@ -24,6 +24,7 @@ public class MainServlet extends HttpServlet {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Object value = dataSnapshot.getValue();
                 out.printf("Value: %s\n", value.toString());
+                Firebase.goOffline();
                 log.info("Firebase is OFFLINE");
                 synchronized (lock) {
                     lock.notify();
